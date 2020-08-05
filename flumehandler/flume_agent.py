@@ -8,15 +8,6 @@ from thrift.protocol.TCompactProtocol import TCompactProtocol
 from .thrift_protocol import Client
 
 
-def connect(host, port) -> Client:
-    socket = TSocket(host, port)
-    transport = TFramedTransport(socket)
-    protocol = TCompactProtocol(transport)
-    client = Client(protocol)
-    transport.open()
-    return client
-
-
 class FlumeAgent:
 
     def __init__(self, hosts, port, batch_size=50, max_size=10000, thread_size=3):
@@ -42,7 +33,7 @@ class FlumeAgent:
         with self.client_lock:
             for host in self.hosts:
                 try:
-                    client = connect(host, self.port)
+                    client = self._connect(host, self.port)
                     self.clients.append(client)
                     self.client2host[client] = host
                 except Exception as e:
@@ -128,7 +119,7 @@ class FlumeAgent:
             for host, timestamp in bad_hosts.items():
                 if time.time() - timestamp >= self.recover_interval:
                     try:
-                        client = connect(host, self.port)
+                        client = self._connect(host, self.port)
                         with self.client_lock:
                             self.clients.append(client)
                             self.client2host[client] = host
@@ -147,3 +138,11 @@ class FlumeAgent:
             if self.client_index >= len(self.clients):
                 self.client_index = 0
             return self.clients[self.client_index]
+
+    def _connect(self, host, port) -> Client:
+        socket = TSocket(host, port)
+        transport = TFramedTransport(socket)
+        protocol = TCompactProtocol(transport)
+        client = Client(protocol)
+        transport.open()
+        return client
