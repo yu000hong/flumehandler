@@ -6,14 +6,13 @@
 #  options string: py
 #
 
-from thrift.Thrift import TType, TMessageType, TFrozenDict, TException, TApplicationException
-from thrift.protocol.TProtocol import TProtocolException
+from thrift.Thrift import TType, TMessageType, TApplicationException
 from thrift.TRecursive import fix_spec
 
 import logging
+from .thrift_ttypes import ThriftFlumeEvent
 from thrift.Thrift import TProcessor
 from thrift.transport import TTransport
-from .ttypes import ThriftFlumeEvent
 all_structs = []
 
 
