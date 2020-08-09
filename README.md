@@ -6,6 +6,10 @@ flume handler for logging, sending log events to Flume.
 pip install flumehandler
 ```
 
+### Architecture
+
+![](doc/flumehandler-architecture.png)
+
 ### Usage
 
 ```python
