@@ -10,6 +10,8 @@ pip install flumehandler
 
 ![](doc/flumehandler-architecture.png)
 
+![](doc/flumeagent.png)
+
 ### Usage
 
 ```python
