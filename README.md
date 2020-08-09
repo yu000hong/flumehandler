@@ -8,7 +8,7 @@ pip install flumehandler
 
 ### Usage
 
-```
+```python
 from flumehandler import FlumeAgent, FlumeHandler
 
 agent = FlumeAgent(hosts=['10.10.10.10'], port=8888, batch_size=20, max_size=10000)
