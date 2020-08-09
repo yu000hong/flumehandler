@@ -8,9 +8,9 @@ pip install flumehandler
 
 ### Architecture
 
-![](doc/flumehandler.png)
+![FlumeHandler](doc/flumehandler.png)
 
-![](doc/flumeagent.png)
+![FlumeAgent](doc/flumeagent.png)
 
 ### Usage
 
